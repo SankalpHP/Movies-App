@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg sticky-top"  style="background-color: #970747;">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex gap-2 align-items-center text-white" (click)="reload()"  [routerLink]="['/home']">
+      <img src="assets/Images/watching.png" height="40px" alt="watching" [routerLink]="['/home']">
+      <h4 class="mt-1" style="font-family: Georgia, serif;">Movie-Mania</h4></a>
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-1 mb-lg-0">
+        <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+          <a class="nav-link active align-items-center text-white" [routerLink]="['/genre','Action']">Action</a>
+        </li>
+        <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+          <a class="nav-link active align-items-center text-white" [routerLink]="['/genre','Drama']">Drama</a>
+        </li>
+         <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+          <a class="nav-link active align-items-center text-white" [routerLink]="['/genre','Romance']">Rom-com</a>
+         </li>
+         <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+          <a class="nav-link active align-items-center text-white" [routerLink]="['/genre','Animation']">Animation</a>
+         </li>
+         <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+          <a class="nav-link active align-items-center text-white" [routerLink]="['/genre','Horror']">Horror</a>
+         </li>
+         <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+          <a class="nav-link active align-items-center text-white" [routerLink]="['/genre','Comedy']">Comedy</a>
+         </li>
+
+        <li class="nav-item dropdown" style="font-family: Ubuntu, sans-serif;">
+            <a class="nav-link active d-flex gap-1 align-items-center text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              All<i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu" style="background-color: #FFFDF2">
+              @for (type of Genre; track $index) {
+                <li class="item" [routerLink]="['/genre',type]">{{type}}</li>
+              } 
+            </ul>
+        </li>
+      </ul>
+      <form class="d-flex" [formGroup]="formData" role="search" (ngSubmit)="getMovie(formData)">
+        <input class="input-control me-2" formControlName="title" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn-control" type="submit" [disabled]="!formData.valid" style="cursor: pointer;">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+
+<!-- serach movie result Modal -->
+<div  class="modal fade" id="Results-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content" style="cursor: pointer;background-color: #FFFDF2;">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Results</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body"  data-bs-dismiss="modal">
+        @if (searchMovies?.length != 0) {
+            @for (movie of searchMovies; track $index) {
+              <span class="d-flex align-items-center gap-2"  [routerLink]="['/details',movie.Title]">
+                  <img [src]="movie.Poster" height="100px" style="border-radius: 10px;">
+                  <h6>{{movie.Title}}</h6>
+              </span>
+              <hr>
+          }
+        }@else {
+          <h5 style="color: #970747;">No Match Found!..</h5>
+        }
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

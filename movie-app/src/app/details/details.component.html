@@ -1,0 +1,55 @@
+<!-- <app-navbar></app-navbar> -->
+@if (this.movie) {
+  <div>
+    <div class="container">
+      <div class="row">
+         <div class="mb-3 mt-4">
+             <div class="row g-0">
+               <div class="col-md-3 text-center" style="padding: 15px;">
+                 <img [src]="movie.Poster" style="height: 430px;padding: 5px;cursor: pointer;" class="img-fluid rounded-4 polaroid" alt="{{movie.Title}}">
+               </div>
+               <div class="col-md-9">
+                 <div class="card-body mt-2 text-start" style="padding: 12px;  font-family: Ubuntu, sans-serif;">
+                   <h1 class="card-text"><strong>{{movie.Title}}</strong></h1>
+                   <p class="card-text">{{movie.Plot}} <strong>Year: </strong>{{movie.Year}}</p>
+                   <div> 
+                     <span class="d-flex gap-2 align-items-center">
+                       <img src="assets/Images/tomato.png" height="35px">
+                       <h6 style="padding-top: 10px;"><strong>Rotten Tomatoes</strong> {{movie.Ratings[1].Value}}</h6>
+                     </span>
+                     <span class="d-flex gap-2 align-items-center">
+                       <img src="assets/Images/imdb.png" height="35px">
+                       <h6 style="padding-top: 10px;"><strong>Imdb Rating</strong> {{movie.imdbRating}}</h6>
+                     </span>
+                   </div>
+                   <div class="d-flex gap-2 align-items-center">
+                     <img src="assets/Images/metascore.png" height="35px">
+                     <h6 style="padding-top: 10px;"><strong>Metascore</strong> {{movie.Metascore}}</h6>
+                   </div>   
+                   <div>
+                     <p><strong>Awards:</strong> {{movie.Awards}}</p>
+                     <p><strong>BoxOffice Collection:</strong> {{movie.BoxOffice}}</p>
+                     <p><strong>Country:</strong> {{movie.Country}}</p>
+                     <p><strong>Language:</strong> {{movie.Language}}</p>
+                     <p><strong>Actors:</strong> {{movie.Actors}}</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+      </div>
+  </div>
+  <div class="container mb-4">
+     <div class="row">
+       <div class="col-lg-12">
+        <div class="ratio ratio-21x9">
+          <iframe *ngIf="safetrailerUrl" [src]="safetrailerUrl" frameborder="0"  allowfullscreen></iframe>
+        </div>
+       </div>
+     </div>
+  </div>
+      <!-- <app-footer></app-footer> -->
+  </div>
+}
+
+<!-- <div>{{movie|json}}</div> -->
