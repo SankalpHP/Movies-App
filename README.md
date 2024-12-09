@@ -32,7 +32,7 @@
  ## Steps to Run the Application
  1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/your-repo.git cd your-repo
+    git clone  https://github.com/SankalpHP/Movies-App.git cd your-repo
     ```
  2. Install dependencies:
     ```bash
