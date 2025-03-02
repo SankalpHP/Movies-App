@@ -12,6 +12,8 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { GenresComponent } from './genres/genres.component';
 import { DetailsComponent } from './details/details.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     HomeComponent,
     GenresComponent,
     DetailsComponent,
+    FavoritesComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

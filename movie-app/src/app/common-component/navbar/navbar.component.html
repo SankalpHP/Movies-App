@@ -37,6 +37,28 @@
               } 
             </ul>
         </li>
+        <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+          @if(!username){
+            <button type="button" class="btn" style="cursor: pointer;background-color: #FFFDF2;font-family: Georgia, serif;" data-bs-toggle="modal" data-bs-target="#LoginModal">Login</button>
+          }
+        </li>
+        @if (username) {
+          <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+            <a class="nav-link active align-items-center text-white">Welcome! {{username}}</a>
+          </li>
+          <li class="nav-item dropdown d-flex gap-1" style="font-family: Ubuntu, sans-serif;">
+            <div class="dropdown">
+              <a class="nav-link active align-items-center" data-bs-toggle="dropdown" aria-expanded="false"><img src="assets/Images/profile.png" height="25px" alt="profile"></a>
+              <ul class="dropdown-menu" style="background-color: #FFFDF2">
+                <li><a class="profile-item" href="#" [routerLink]="['/favorites']">Favorite <img src="assets/Images/heart.png" height="20px" alt="heart"></a></li>
+                  @if (isAdmin) {
+                    <li><a href="#" class="profile-item" [routerLink]="['/admin']">Admin</a></li>
+                  }
+                <li><a class="profile-item" (click)="logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+        }
       </ul>
       <form class="d-flex" [formGroup]="formData" role="search" (ngSubmit)="getMovie(formData)">
         <input class="input-control me-2" formControlName="title" type="search" placeholder="Search" aria-label="Search">
@@ -50,7 +72,7 @@
 
 
 <!-- serach movie result Modal -->
-<div  class="modal fade" id="Results-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div  class="modal fade" id="Results-Modal" tabindex="-1" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content" style="cursor: pointer;background-color: #FFFDF2;">
       <div class="modal-header">
@@ -76,3 +98,93 @@
     </div>
   </div>
 </div>
+
+<!-- Login & Sign up Model -->
+<div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="assets/Images/watching.png" height="40px" alt="watching">
+        <h4 class="mt-1" style="font-family: Georgia, serif;">Movie-Mania</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="d-flex gap-2 mt-1  justify-content-center">
+        <button [ngClass]="loginForm?'btn btn-success':'btn btn-light'" style="font-family: Georgia, serif;" id="LoginModalLabel" (click)="isdisplay('login')">Login</button>
+        <button [ngClass]="signupForm?'btn btn-success':'btn btn-light'" id="LoginModalLabel" style="font-family: Georgia, serif;" (click)="isdisplay('signup')">Sign up</button>
+      </div>
+      <div class="modal-body">
+        <!-- Login Form -->
+          <form [formGroup]="userLogin" [ngClass]="loginForm?'show':'nonshow'" (ngSubmit)="login()">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address<span style="color: tomato;">*</span></label>
+                <input formControlName="email" type="email" class="form-control" id="loginEmail1" aria-describedby="emailHelp">
+                <div *ngIf="userLogin.invalid && (userLogin.touched || userLogin.dirty)">
+                      <div *ngIf="userLogin.get('email')?.hasError('required')" class="alert alert-danger">Email is required</div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password<span style="color: tomato;">*</span></label>
+                <input formControlName="password"  type="password" class="form-control" id="loginPassword1">
+                <div *ngIf="userLogin.invalid && (userLogin.touched || userLogin.dirty)">
+                  <div *ngIf="userLogin.get('password')?.hasError('required')" class="alert alert-danger">Password is required</div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+
+          <!-- Sign in Form -->
+          <form [formGroup]="userSignup" [ngClass]="signupForm?'show':'nonshow'" (ngSubmit)="signup()">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Username<span style="color: tomato;">*</span></label>
+              <input formControlName="user" type="text" class="form-control" id="exampleInputuser1" aria-describedby="userHelp">
+              <div *ngIf="userSignup.invalid && (userSignup.touched || userSignup.dirty)">
+                    <div *ngIf="userSignup.get('user')?.hasError('required')"  class="alert alert-danger">Username is required</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address<span style="color: tomato;">*</span></label>
+              <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div *ngIf="userSignup.invalid && (userSignup.touched || userSignup.dirty)">
+                    <div *ngIf="userSignup.get('email')?.hasError('required')"  class="alert alert-danger">Email is required</div>
+                    <div *ngIf="userSignup.get('email')?.hasError('email')"  class="alert alert-danger">Check the email format</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password<span style="color: tomato;">*</span></label>
+              <input formControlName="password"  type="password" class="form-control" id="exampleInputPassword1">
+              <div *ngIf="userSignup.invalid && (userSignup.touched || userSignup.dirty)">
+                    <div *ngIf="userSignup.get('password')?.hasError('required')" class="alert alert-danger">Password is required</div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign up</button>
+          </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Message Modal -->
+<div class="modal fade" id="LoginMessageModalLabel" tabindex="-1" aria-labelledby="LoginMessageModalLabel">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        @if(loginmsg == "Login successfully!" || loginmsg == "Register successfully!" || loginmsg == "Logout successfully!"){
+          <div class="alert alert-success">{{loginmsg}}</div>
+        }@else if(loginmsg == "Invalid Credentials" || loginmsg == "User not found" || loginmsg == "Timeup Token is expiry! Please login again"){
+          <div class="alert alert-danger">{{loginmsg}}</div>
+        }
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

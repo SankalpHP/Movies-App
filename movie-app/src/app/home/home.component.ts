@@ -27,7 +27,7 @@ export class HomeComponent {
     this.activePage = page;
     this.http.getMovies(body).subscribe((data:any) => { 
       this.allMovies = data;
-    
+     
     if(this.onload){
           for (let index = 0; index < this.allMovies.totalPages; index++) {
             this.pages.push(index+1);
