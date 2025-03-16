@@ -17,11 +17,11 @@
  + **Signup:** Signup as user.
  + **Add Movie to Favorite:** user can add their favorite movie.
  + **Remove Movie from Favorite**  user can remove their favorite movie.
- + **comments:** user can comment on movies they like.
+ + **comments:** user can comment on movies they like and admin can remove the comments.
 ## Tech Stack
  ### Frontend
  + Framework: Angular 18.
- + Styling: Bootstrap,HTML,CSS.
+ + Styling: Bootstrap,HTML,CSS,jquery.
  + Language: Javascript,TypeScript.
  ### Backend
  + Framework: Express js.
