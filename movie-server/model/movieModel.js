@@ -1,20 +1,26 @@
 const connectToMongodb = require('../dbConfig/mongodbConfig');
 
+
+let db; 
+connectToMongodb()
+  .then((resolve)=>{
+      db = resolve;
+  })
+  .catch((reject)=>{
+      console.log(reject);
+  });
+
 module.exports = {
-   
     //  get all movies
-    getAllMovies:async()=>{
-        const db = await connectToMongodb();
+    getAllMovies:()=>{
         return db.collection('movies').find().toArray();
     },
     // get movie details by it title
-    getDetails:async(title)=>{
-        const db = await connectToMongodb();
+    getDetails:(title)=>{
         return db.collection('movies').findOne({Title:title});
     },
     // get movie by genre
-    getGenre:async(genre)=>{
-        const db = await connectToMongodb();
+    getGenre:(genre)=>{
         // Use $regex to match the genre string (case-insensitive)
         return db.collection('movies').find({Genre:{ $regex: new RegExp(genre, 'i')}}).toArray(); // 'i' for case-insensitivity
     },

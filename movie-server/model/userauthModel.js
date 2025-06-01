@@ -2,10 +2,19 @@ const connectToMongodb = require('../dbConfig/mongodbConfig');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
+// connect to mongodb
+let db; 
+connectToMongodb()
+  .then((resolve)=>{
+      db = resolve;
+  })
+  .catch((reject)=>{
+      console.log(reject);
+  });
+
+
 module.exports = {
     saveUser:async(body)=>{
-        // connect to db
-        const db = await connectToMongodb();
         const{username,email,password} = body;
         const role = ["user"];
 
@@ -17,8 +26,6 @@ module.exports = {
     },
 
     getUser:async(body)=>{
-       // connect db
-       const db = await connectToMongodb();
        const{email,password} = body;
 
        // Find the user by email

@@ -38,7 +38,7 @@ module.exports = {
     removeComment:async(req,res)=>{
         try {
             const comment  = await commentModel.removeComment(req.body);
-            console.log(comment);
+            // console.log(comment);
 
             if(comment.deletedCount != 0){
               res.json({message:"comment deleted successfully!"})
