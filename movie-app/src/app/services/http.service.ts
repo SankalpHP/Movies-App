@@ -1,16 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { log } from 'console';
-import { firstValueFrom, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-   url = "http://localhost:3000";
-  //url = "http://65.1.106.176:3000";
-  constructor(private http:HttpClient,private router:Router) { }
+  // url = "http://localhost:3000";
+  url = "http://65.1.106.176:3000";
+  constructor(private http:HttpClient) { }
 
   getMovies(body:any):Observable<any>{
     return this.http.post(`${this.url}/movies/getallmovies`,body);

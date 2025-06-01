@@ -32,7 +32,7 @@ export class FavoritesComponent {
          if (this.helper.isTokenExpried(token)) {
            // Decode JWT payload (assuming it's base64 encoded)
             const payload = JSON.parse(atob(token.split(".")[1]))
-            console.log(token);
+            // console.log(token);
           
             let body = {
               userId:payload.id
@@ -75,7 +75,7 @@ export class FavoritesComponent {
         }
         // remove the fav movie http
         this.http.removeFavMovie(body).subscribe((data:any)=>{
-              console.log(data);
+              // console.log(data);
               if(data.message == "movie remove from your favorite!"){
                 // again call the movie's
                 this.getfavMovie();

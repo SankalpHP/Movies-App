@@ -68,7 +68,7 @@ export class NavbarComponent {
               if(token){
                 // Decode JWT payload (assuming it's base64 encoded)
                   const payload = JSON.parse(atob(token.split('.')[1]))
-                  console.log(payload);
+                  // console.log(payload);
                   this.username = payload.name;
 
                   if(payload.role[1] == "admin"){
@@ -117,7 +117,7 @@ export class NavbarComponent {
     login(){
 
       if (this.userLogin.valid) {
-        console.log(this.userLogin.value);
+        // console.log(this.userLogin.value);
         
         let body = {
            email:this.userLogin.value.email,
@@ -125,7 +125,7 @@ export class NavbarComponent {
         }
         try {
           this.http.getUser(body).subscribe((data:any)=>{
-             console.log(data);
+            //  console.log(data);
              if(data.user.message == "Login successfully!"){
 
               // set the msg to msg modal
@@ -163,7 +163,7 @@ export class NavbarComponent {
     signup(){
 
       if (this.userSignup.valid) {
-        console.log(this.userSignup.value.user);
+        // console.log(this.userSignup.value.user);
         let body = {
             username:this.userSignup.value.user,
             email:this.userSignup.value.email,

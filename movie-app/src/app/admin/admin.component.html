@@ -16,7 +16,7 @@
                     <tbody  class="table-group-divider">
                         @if (comments) {
                             @for (comment of comments; track $index) {
-                                <tr style="font-family: 'Times New Roman', Times, serif">
+                                <tr class="text-center" style="font-family: 'Times New Roman', Times, serif">
                                     <td>{{$index + 1}}</td>
                                     <td>{{comment.movie}}</td>
                                     <td>{{comment.comment}}</td>

@@ -73,7 +73,7 @@ export class DetailsComponent {
               // Decode JWT payload (assuming it's base64 encoded)
               const payload = JSON.parse(atob(token.split('.')[1]))
 
-              console.log(payload);
+              // console.log(payload);
             
               let body = {
                 movie:this.title,
@@ -137,7 +137,7 @@ export class DetailsComponent {
         if (this.helper.isTokenExpried(token)) {
           // Decode JWT payload (assuming it's base64 encoded)
           const payload = JSON.parse(atob(token.split('.')[1]));
-          console.log(payload);
+          // console.log(payload);
           
             let body = {
               title : this.movie.Title,
@@ -146,7 +146,7 @@ export class DetailsComponent {
               userId: payload.id
             }
             this.http.saveFavMovie(body).subscribe((data:any)=>{
-              console.log(data);
+              // console.log(data);
               // set the message
               this.message = data.message;
               // show the message
